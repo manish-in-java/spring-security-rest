@@ -1,0 +1,51 @@
+<#import "/spring.ftl" as spring />
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Welcome</title>
+        <link href="<@spring.url '/c/main.css' />" rel="stylesheet" type="text/css" />
+        <link href="<@spring.url '/c/profile.css' />" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <#if role == "ADMIN">
+                <a href="<@spring.url '/users' />">Users</a>
+                &nbsp;
+                </#if>
+                <a href="<@spring.url '/logout' />">Sign out</a>
+            </div>
+            <div class="profile">
+	            <div class="photo">
+	                <p>
+	                    <img alt="${name}" src="<@spring.url '/i/photo.png' />" />
+	                </p>
+	            </div><!--
+	            --><div class="description">
+		            <h1>${name}</h1>
+		            <span class="hint">${role?capitalize} User</span>
+		            <p>
+                    If you are seeing this page, you have been authenticated successfully by the application.
+                    This application uses Spring Security for user authentication and authorization. Spring
+                    Security is a comprehensive framework that adds enterprise-level security features to Java
+                    applications.  It offers the following notable advantages over other similar frameworks
+                    and standards:
+		            </p>
+		            <ol>
+		              <li><b>Application portability:</b> Standards such as the Java Servlet Specification or
+		              the EJB specification include provisions for application security.  However, applications
+		              built using these standards are not portable across Java application servers. This means,
+		              WAR or EAR files built using these standards cannot be simply ported from one server
+		              environment to another involving differing application servers.  In practice, a move
+		              such as this would involve a lot of manual effort in configuring security during the
+		              port.</li>
+		              <li><b>Flexibility</b>: Spring Security is extremely flexible when it comes to supporting
+		              different types of user authentication and authorization.  It can integrate with almost
+		              any authentication and authorization system.</li>
+		            </ol>
+	            </div>
+            </div>
+        </div>
+    </body>
+</html>

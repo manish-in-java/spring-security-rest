@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//LOGGER" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<appender class="org.apache.log4j.ConsoleAppender" name="message">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%5p] %m%n" />
+		</layout>
+	</appender>
+	<logger additivity="false" name="org.example">
+		<level value="INFO" />
+		<appender-ref ref="message" />
+	</logger>
+	<root>
+		<priority value="INFO" />
+		<appender-ref ref="message" />
+	</root>
+</log4j:configuration>

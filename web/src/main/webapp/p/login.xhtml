@@ -1,0 +1,41 @@
+<#import "/spring.ftl" as spring />
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Sign-in</title>
+        <link href="<@spring.url '/c/main.css' />" rel="stylesheet" type="text/css" />
+        <link href="<@spring.url '/c/login.css' />" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="container">
+            <div id="banners">
+                <img alt="Secure sign-in" src="<@spring.url '/i/lock.png' />" />
+            </div><!--
+            --><div id="login">
+                <form action="<@spring.url '/login/submit' />" id="login" method="POST">
+                    <fieldset>
+                        <h1>Sign-in</h1>
+                        <div class="formRow hint">Please sign-in to authenticate</div>
+                        <br /><br />
+                        <div class="formRow">
+                          <div class="formField">
+                              <input autofocus="autofocus" id="username" maxlength="100" name="username" placeholder="james for regular user, john for admin" type="text" value="" />
+                          </div>
+                      </div>
+                        <div class="formRow">
+                          <div class="formField">
+                              <input id="password" maxlength="16" name="password" placeholder="password" type="password" value="password" />
+                          </div>
+                      </div>
+                      <div class="formRow">
+                          <div class="formField formSubmit">
+                              <button>Sign In</button>
+                          </div>
+                      </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

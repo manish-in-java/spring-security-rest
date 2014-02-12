@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:security="http://www.springframework.org/schema/security"
+  xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+  <import resource="classpath*:springSecurityContext.xml" />
+  <aop:aspectj-autoproxy proxy-target-class="true" />
+  <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+    <property name="freemarkerSettings">
+      <props>
+        <prop key="arithmetic_engine">conservative</prop>
+        <prop key="date_format">dd-MMM-yyyy</prop>
+        <prop key="datetime_format">dd-MM-yyyy h:mm a</prop>
+        <prop key="number_format">#####</prop>
+        <prop key="time_format">h:mm a</prop>
+        <prop key="whitespace_stripping">true</prop>
+      </props>
+    </property>
+    <property name="freemarkerVariables">
+      <map>
+        <entry key="default_encoding" value="UTF-8" />
+        <entry key="html_escape">
+          <bean class="freemarker.template.utility.HtmlEscape" />
+        </entry>
+        <entry key="template_update_delay" value="0" />
+        <entry key="xml_escape">
+          <bean class="freemarker.template.utility.XmlEscape" />
+        </entry>
+      </map>
+    </property>
+    <property name="templateLoaderPaths">
+      <array>
+        <value>/p/</value>
+        <value>/l/</value>
+      </array>
+    </property>
+  </bean>
+  <bean id="freemarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+    <property name="cache" value="true" />
+    <property name="exposeRequestAttributes" value="true" />
+    <property name="exposeSessionAttributes" value="true" />
+    <property name="exposeSpringMacroHelpers" value="true" />
+    <property name="order" value="1" />
+    <property name="prefix" value="" />
+    <property name="requestContextAttribute" value="requestContext" />
+    <property name="suffix" value=".xhtml" />
+  </bean>
+  <context:annotation-config />
+  <context:component-scan base-package="org.example.web" />
+  <mvc:annotation-driven />
+  <mvc:resources location="/c/" mapping="/c/**" />
+  <mvc:resources location="/i/" mapping="/i/**" />
+  <mvc:resources location="/s/" mapping="/s/**" />
+</beans>

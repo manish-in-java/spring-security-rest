@@ -1,0 +1,39 @@
+<#import "/spring.ftl" as spring />
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Users</title>
+        <link href="<@spring.url '/c/main.css' />" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <a href="<@spring.url '/' />">Home</a>
+                &nbsp;
+                <a href="<@spring.url '/logout' />">Sign out</a>
+            </div>
+            <h1>Application Users</h1>
+            <table width="480">
+                <thead>
+                    <tr>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <#list users as user>
+                    <tr>
+                        <td>${user.getFirstName()?html}</td>
+                        <td>${user.getLastName()?html}</td>
+                        <td><b>${user.getUsername()?html}</b></td>
+                        <td><i>${user.getRole()?capitalize} User</i></td>
+                    </tr>
+                    </#list>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,52 @@
+h1 {
+    font-size: 32px;
+}
+
+#container {
+	padding: 100px 0;
+}
+
+#container>#banners,#container>#login {
+	display: inline-block;
+	position: relative;
+	vertical-align: top;
+}
+
+#container>#banners {
+	border: 1px solid #F2F2F2;
+	box-shadow: 0px 0px 5px #333;
+	height: 420px;
+	margin: 0 40px;
+	overflow: hidden;
+	width: 420px;
+}
+
+#container>#login {
+	width: 460px;
+}
+
+#container>#login input[type=password],#container>#login input[type=text],#container>#login select
+	{
+	font-size: 13px;
+	margin-bottom: 10px;
+}
+
+#container>#login input[type=password],#container>#login input[type=text]
+	{
+	min-width: 270px;
+	padding: 10px 15px;
+}
+
+#container>#login .formSubmit>button {
+	background-color: #39F;
+	border: 1px solid #FFF;
+	color: #FFF;
+	cursor: pointer;
+	font-size: 14px;
+	outline: 1px solid #39F;
+	padding: 7px 12px;
+}
+
+#container>#login .formSubmit>button:active {
+	outline: 0;
+}

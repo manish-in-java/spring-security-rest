@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:security="http://www.springframework.org/schema/security" xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+  <bean class="org.example.web.security.UsernamePasswordAuthenticationProvider" id="authenticationProvider" />
+  <security:authentication-manager erase-credentials="false">
+    <security:authentication-provider ref="authenticationProvider" />
+  </security:authentication-manager>
+  <security:http pattern="/c/**" security="none" />
+  <security:http pattern="/d/**" security="none" />
+  <security:http pattern="/i/**" security="none" />
+  <security:http pattern="/s/**" security="none" />
+  <security:http access-denied-page="/" auto-config="true" use-expressions="true">
+    <security:form-login always-use-default-target="false" authentication-failure-url="/login" login-page="/login" login-processing-url="/login/submit"
+      password-parameter="password" username-parameter="username" />
+    <security:logout delete-cookies="true" invalidate-session="true" logout-url="/logout" />
+    <security:intercept-url access="isAnonymous()" pattern="/login/**" />
+    <security:intercept-url access="isAuthenticated()" pattern="/**" />
+  </security:http>
+</beans>
