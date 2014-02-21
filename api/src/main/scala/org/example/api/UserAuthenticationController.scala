@@ -1,15 +1,14 @@
 package org.example.api
 
 import javax.servlet.http.{ HttpServletRequest, HttpServletResponse }
-
 import org.example.transfer.Response
-
 import org.springframework.beans.factory.annotation.{ Autowired, Qualifier }
 import org.springframework.security.authentication.{ AuthenticationManager, InternalAuthenticationServiceException, UsernamePasswordAuthenticationToken }
 import org.springframework.security.core.{ Authentication, AuthenticationException }
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.context.SecurityContextRepository
 import org.springframework.web.bind.annotation.{ RequestMapping, ResponseBody, RestController, RequestParam, RequestMethod }
+import scala.beans.BeanProperty
 
 /**
  * User Authentication controller.
@@ -44,7 +43,8 @@ class UserAuthenticationController {
         authenticationResponse.addError("Unable to authenticate the user.")
       } else {
         // Add an authentication token to the response.
-        authenticationResponse.token = authenticationResult.getDetails.asInstanceOf[String]
+         println("%% " + authenticationResult.getDetails)
+         authenticationResponse.token = authenticationResult.getDetails.asInstanceOf[String]
 
         // Save the authentication token in the security context.
         SecurityContextHolder.getContext.setAuthentication(authenticationResult)
@@ -72,6 +72,7 @@ class UserAuthenticationController {
 /**
  * Represents an API authentication response.
  */
-class UserAuthenticationResponse(val username: String) extends Response {
+class UserAuthenticationResponse(@transient val username: String) extends Response {
+  @BeanProperty
   var token: String = _
 }

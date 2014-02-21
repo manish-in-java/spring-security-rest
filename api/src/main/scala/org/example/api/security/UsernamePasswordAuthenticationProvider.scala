@@ -23,6 +23,11 @@ class UsernamePasswordAuthenticationProvider extends AuthenticationProvider {
   override def authenticate(authentication: Authentication): Authentication = {
     val authenticationResponse = this.userService.authenticate(new UserAuthenticationRequest(authentication.getName, authentication.getCredentials.asInstanceOf[String]))
 
+    println("## " + authenticationResponse.firstName)
+    println("## " + authenticationResponse.lastName)
+    println("## " + authenticationResponse.role)
+    println("## " + authenticationResponse.username)
+
     if (authenticationResponse.isSuccess) {
       SecurityContextHolder.getContext.setAuthentication(new APIAuthenticationToken(authenticationResponse))
 

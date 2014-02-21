@@ -13,12 +13,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
  * authentication and authorization information for a person.
  */
 final class APIAuthenticationToken(user: UserAuthenticationResponse) extends Authentication with CredentialsContainer {
-  private val authorities: Set[GrantedAuthority] = new HashSet[GrantedAuthority](1)
+  private[this] val authorities: Set[GrantedAuthority] = new HashSet[GrantedAuthority](1)
   authorities.add(new SimpleGrantedAuthority(user.role.name))
-  private val name = user.name
+  private[this] val name = user.name
   private val principal = user.username
-  private val role = user.role
-  private val token = TokenGenerator.generateToken
+  private[this] val role = user.role
+  private[this] val token = TokenGenerator.generateToken
 
   /**
    * @see org.springframework.security.core.CredentialsContainer#eraseCredentials()
@@ -38,7 +38,7 @@ final class APIAuthenticationToken(user: UserAuthenticationResponse) extends Aut
   /**
    * @see org.springframework.security.core.Authentication#getDetails()
    */
-  override def getDetails = null
+  override def getDetails = this.token
 
   /**
    * @see java.security.Principal#getName()
