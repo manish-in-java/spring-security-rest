@@ -9,8 +9,8 @@ This prevents information leakage and malicious use of the application by intern
 external users.
 
 Spring Security is a flexible framework for implementing security requirements for web
-based applications.  It is therefore not uncommon for developers to use Spring Security to
-enforce security restrictions on REST API endpoints.  One of the challenges encountered
+based applications.  It is therefore not uncommon for developers to use Spring Security for
+enforcing security restrictions on REST API endpoints.  One of the challenges encountered
 when using Spring Security to secure REST API endpoints stems from the requirement to
 support stateless REST clients.  In this context, *stateless* means that the client does
 not provide any information with REST requests that would allow the server to determine the
@@ -56,7 +56,9 @@ With this configuration, Spring Security uses HTTP sessions to store user creden
 between requests.
 
 The *API* layer cannot use the default configuration because all communication between this
-layer and its clients has been assumed to be stateless.  Spring Security configuration for
+layer and its clients has been assumed to be stateless, which means that HTTP Sessions
+cannot be relied upon for determining the application users' identity but the default Spring
+Security configuration makes use of HTTP Sessions.  Spring Security configuration for
 this layer is therefore slightly more involved and is shown below.
 
      <bean class="org.example.api.security.APIAuthenticationEntryPoint" id="apiAuthenticationEntryPoint" />
@@ -75,6 +77,10 @@ Spring Security interface `SecurityContextRepository`, whose other implementatio
 Of course, it is not mandatory to use Ehcache.  Any other caching solution could be used to
 store user credentials in between REST calls.
 
+In essence, theHTTP Session has been replaced with an expirable cache.  Provided the cache is
+configured correctly, it provides exactly the same semantics as the HTTP Session for storing
+Spring Security authentication tokens, such as, sliding expiration, idle timeout and replication.
+
 #4. Running the application
 The following pre-requisites apply to this application.
 
@@ -82,17 +88,15 @@ The following pre-requisites apply to this application.
 1. Apache Maven 3.0.4 or higher.
 
 Once these have been installed and the code checked out, the `web` application can be run
-as `mvn clean package tomcat7:run -pl common,data,domain,service,transfer,web`.  This starts an
-embedded Tomcat instance on local port `8888`.  The application can then be accessed using
-any web browser on [http://localhost:8888](http://localhost:8888).  When accessed for the first
-time, the application will present a login screen with instructions on logging in.
-Successfully logging in as an *Admin* user provides access to a list of users for the system.
-This functionality is not accessible to normal users (try accessing it as a normal user).
+as `mvn clean package tomcat7:run -am -pl web`.  This starts an embedded Tomcat instance on
+local port `8888`.  The application can then be accessed using any web browser on [http://localhost:8888](http://localhost:8888).  When accessed for the first time, the
+application will present a login screen with instructions on logging in.  Successfully logging
+in as an *Admin* user provides access to a list of users for the system.  This functionality
+is not accessible to normal users (try accessing it as a normal user).
 
-Similarly, the `api` application can be run as
-`mvn clean package tomcat7:run -pl api,common,data,domain,service,transfer`.  This starts
-an embedded Tomcat instance on local port `9999`.  The application can then be accessed
-using a REST client, such as the *Postman* extension for Google Chrome on
+Similarly, the `api` application can be run as `mvn clean package tomcat7:run -am -pl api`.
+This starts an embedded Tomcat instance on local port `9999`.  The application can then be
+accessed using a REST client, such as the *Postman* extension for Google Chrome on
 `http://localhost:9999`.  There are two REST endpoints - `http://localhost:9999/authenticate`
 to authenticate clients and `http://localhost:9999/users` to access the user list.
 First, make a *POST* request to `http://localhost:9999/authenticate` with two form parameters
