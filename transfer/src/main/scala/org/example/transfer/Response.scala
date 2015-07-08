@@ -1,9 +1,6 @@
 package org.example.transfer
 
-import java.util.Collection
-import java.util.Collections
-import java.util.LinkedHashSet
-import java.util.Set
+import java.util.{Collection, Collections, LinkedHashSet, Set}
 
 /**
  * Represents a data transfer response.
@@ -25,7 +22,7 @@ trait Response extends TransferObject {
   /**
    * Gets errors associated with the response.
    *
-   * @return A {@link Collection} of errors.
+   * @return A [[Collection]] of errors.
    */
   def getErrors: Collection[String] = Collections.unmodifiableSet(this.errors)
 

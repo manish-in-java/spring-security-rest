@@ -1,24 +1,19 @@
 package org.example.data
 
-import java.util.ArrayList
-import java.util.Collection
-import java.util.Collections
-import java.util.Comparator
-import java.util.HashMap
-import java.util.List
+import java.util.{ArrayList, Collection, Collections, HashMap}
 
 import org.example.domain.User
 import org.example.transfer.UserRoleEnum
 import org.springframework.stereotype.Component
 
 /**
- * Contract for data access operations on {@link User}.
+ * Contract for data access operations on [[User]].
  */
 trait UserRepository {
   /**
    * Finds all users in the system.
    *
-   * @return A {@link Collection} of {@link User}s.
+   * @return A [[Collection]] of [[User]]s.
    */
   def findAll: Collection[User]
 
@@ -26,8 +21,8 @@ trait UserRepository {
    * Finds a user with a specified authentication username.
    *
    * @param username
-   *        The username to find.
-   * @return A {@link User}.
+   * The username to find.
+   * @return A [[User]].
    */
   def findOne(username: String): User
 }

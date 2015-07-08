@@ -3,7 +3,7 @@ package org.example.transfer
 /**
  * Represents a user authentication response.
  */
-case class UserAuthenticationResponse extends Response {
+case class UserAuthenticationResponse() extends Response {
   /**
    * The user's first name.
    */

@@ -5,11 +5,11 @@ import org.example.transfer.UserRoleEnum
 /**
  * Represents an application user.
  */
-case class User(val username: String, val password: String, val firstName: String, val lastName: String, val role: UserRoleEnum) extends Ordered[User] {
-  require(firstName != null && firstName.trim != "", "First name must not be null or blank.")
-  require(lastName != null && lastName.trim != "", "Last name must not be null or blank.")
-  require(username != null && username.trim != "", "Username must not be null or blank.")
-  require(password != null && password.trim != "", "Password name must not be null or blank.")
+case class User(username: String, password: String, firstName: String, lastName: String, role: UserRoleEnum) extends Ordered[User] {
+  require(firstName != null, "First name must not be null or blank.")
+  require(lastName != null, "Last name must not be null or blank.")
+  require(username != null, "Username must not be null or blank.")
+  require(password != null, "Password name must not be null or blank.")
   require(role != null, "Role must not be null.")
 
   /**

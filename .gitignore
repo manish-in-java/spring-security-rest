@@ -1,5 +1,6 @@
 .classpath
 .project
+.idea/
 .settings/
 target/
 api/.classpath
@@ -33,4 +34,8 @@ web/.settings/
 web/src/main/webapp/WEB-INF/classes/
 web/target/
 *~
+*.iml
+*.lck
+*.log
+*.tlog
 *.tmp

@@ -4,10 +4,10 @@ import javax.servlet.http.{ HttpServletRequest, HttpServletResponse }
 import org.example.transfer.Response
 import org.springframework.beans.factory.annotation.{ Autowired, Qualifier }
 import org.springframework.security.authentication.{ AuthenticationManager, InternalAuthenticationServiceException, UsernamePasswordAuthenticationToken }
-import org.springframework.security.core.{ Authentication, AuthenticationException }
+import org.springframework.security.core.AuthenticationException
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.context.SecurityContextRepository
-import org.springframework.web.bind.annotation.{ RequestMapping, ResponseBody, RestController, RequestParam, RequestMethod }
+import org.springframework.web.bind.annotation.{ RequestMapping, RestController, RequestParam, RequestMethod }
 import scala.beans.BeanProperty
 
 /**
@@ -24,8 +24,8 @@ class UserAuthenticationController {
   /**
    * Authenticates an API user using username and password information included in API call headers.
    *
-   * @param request The {@link HttpServletRequest} for the API call.
-   * @param response The {@link HttpServletResponse} for the API call.
+   * @param request The [[HttpServletRequest]] for the API call.
+   * @param response The [[HttpServletResponse]] for the API call.
    */
   @RequestMapping(method = Array(RequestMethod.POST), value = Array("/authenticate"))
   def authenticate(@RequestParam username: String, @RequestParam password: String, request: HttpServletRequest, response: HttpServletResponse): UserAuthenticationResponse = {
@@ -65,7 +65,7 @@ class UserAuthenticationController {
       }
     }
 
-    return authenticationResponse
+    authenticationResponse
   }
 }
 

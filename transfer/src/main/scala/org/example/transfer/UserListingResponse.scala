@@ -7,14 +7,14 @@ import java.util.Collections
 /**
  * Represents a user listing response.
  */
-case class UserListingResponse extends Response {
+case class UserListingResponse() extends Response {
   var users: Collection[UserDetail] = _
 
   /**
    * Adds a user to the response.
    *
    * @param user
-   *        A {@link UserDetail} to add to the response.
+   *        A [[UserDetail]] to add to the response.
    */
   def addUser(user: UserDetail) {
     if (user != null) {
@@ -29,7 +29,7 @@ case class UserListingResponse extends Response {
   /**
    * Gets users for the system.
    *
-   * @return A {@link Collection} of {@link UserDetail}s.
+   * @return A [[Collection]] of [[UserDetail]]s.
    */
-  def getUsers(): Collection[UserDetail] = if (this.users != null) Collections.unmodifiableCollection(this.users) else Collections.emptyList[UserDetail]
+  def getUsers: Collection[UserDetail] = if (this.users != null) Collections.unmodifiableCollection(this.users) else Collections.emptyList[UserDetail]
 }
